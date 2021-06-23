@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <h2>Importar dado de fora</h2>
+    <button @click.prevent="importData">Importar dado do banco</button>
     <Form :form="form" />
     <Submit @submit="submit" />
   </div>
@@ -17,8 +19,21 @@ export default {
   },
   methods: {
     submit () {
-      // aplica aqui a tua lógica
-      console.log(this.form)
+      window.alert(`Nome: ${this.form.name}, E-mail: ${this.form.email}`)
+    },
+    async importData () {
+      function mycode () {
+        return new Promise((resolve, reject) => {
+          return setTimeout(() => {
+            resolve({
+              email: 'teste@teste.com.br',
+              name: 'Teste da Silva'
+            })
+          }, 2000);
+        })
+        
+      }
+      mycode().then(res => this.form = res)
     }
   }
 }
